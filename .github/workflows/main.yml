@@ -1,0 +1,43 @@
+name: RezzzFy Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kernel source
+        uses: actions/checkout@v4
+
+      - name: KernelSu Next setup
+        run: |
+          # Download and execute the KernelSU Next setup script.
+          # This script typically prepares the kernel source for KernelSU integration.
+          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+          
+      - name: SUFS setup
+        run: |
+          # Download and execute the SUFS setup script.
+          # This is likely for integrating SUFS features into the kernel.
+          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
+
+      - name: Android kernel build
+        uses: lemniskett/android-kernel-actions@master
+        id: build
+        env:
+          NAME: RezzzFy
+        with:
+          arch: arm64
+          compiler: gcc/12
+          defconfig: ice-whyred-oldcam_defconfig
+          image: Image.gz-dtb
+
+      - name: Upload Built Kernel
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-kernel
+          path: |
+            # This path refers to the output file of the 'Android kernel build' step.
+            # It's typically the compiled kernel image (e.g., Image.gz-dtb).
+            ${{ steps.build.outputs.outfile }}
