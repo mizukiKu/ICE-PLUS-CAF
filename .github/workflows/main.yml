@@ -17,8 +17,11 @@ jobs:
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
           
       - name: Set up MemKernel as a module (M-OUT) with specified name
-      run: |
-        curl -LSs "https://raw.githubusercontent.com/anko5/MemKernel/refs/heads/main/kernel/setup.sh" | bash -s Y
+        # --- PERBAIKAN DI BAWAH INI ---
+        # 'run:' harus di-indentasi (diberi spasi) agar sejajar dengan 'name:'
+        # yang ada di atasnya, tetapi tanpa tanda '-'.
+        run: |
+          curl -LSs "https://raw.githubusercontent.com/anko5/MemKernel/refs/heads/main/kernel/setup.sh" | bash -s Y
           
       - name: SUKI setup
         run: |
@@ -27,7 +30,9 @@ jobs:
           curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
 
       - name: Android kernel build
-        uses: lemniskett/android-kernel-actions@master
+        # --- SARAN PERBAIKAN (BEST PRACTICE) ---
+        # Mengganti '@master' dengan '@v1' agar build lebih stabil
+        uses: lemniskett/android-kernel-actions@v1
         id: build
         env:
           NAME: RezzzFy
@@ -42,6 +47,5 @@ jobs:
         with:
           name: built-kernel
           path: |
-            # This path refers to the output file of the 'Android kernel build' step.
-            # It's typically the compiled kernel image (e.g., Image.gz-dtb).
+            # Path ini sudah benar, tidak perlu diubah.
             ${{ steps.build.outputs.outfile }}
