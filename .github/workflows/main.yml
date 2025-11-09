@@ -16,11 +16,15 @@ jobs:
           # This script typically prepares the kernel source for KernelSU integration.
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
           
-      - name: SUFS setup
+      - name: Set up MemKernel as a module (M-OUT) with specified name
+      run: |
+        curl -LSs "https://raw.githubusercontent.com/anko5/MemKernel/refs/heads/main/kernel/setup.sh" | bash -s Y
+          
+      - name: SUKI setup
         run: |
-          # Download and execute the SUFS setup script.
-          # This is likely for integrating SUFS features into the kernel.
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
+          # Download and execute the SUKI setup script.
+          # This is likely for integrating SUKI features into the kernel.
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
 
       - name: Android kernel build
         uses: lemniskett/android-kernel-actions@master
