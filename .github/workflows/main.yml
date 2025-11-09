@@ -32,7 +32,7 @@ jobs:
       - name: Android kernel build
         # --- SARAN PERBAIKAN (BEST PRACTICE) ---
         # Mengganti '@master' dengan '@v1' agar build lebih stabil
-        uses: lemniskett/android-kernel-actions@v1
+        uses: lemniskett/android-kernel-actions@v4
         id: build
         env:
           NAME: RezzzFy
