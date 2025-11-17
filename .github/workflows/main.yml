@@ -9,26 +9,7 @@ jobs:
     steps:
       - name: Checkout kernel source
         uses: actions/checkout@v4
-
-      - name: KernelSu Next setup
-        run: |
-          # Download and execute the KernelSU Next setup script.
-          # This script typically prepares the kernel source for KernelSU integration.
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
-          
-      - name: Set up MemKernel as a module (M-OUT) with specified name
-        # --- PERBAIKAN DI BAWAH INI ---
-        # 'run:' harus di-indentasi (diberi spasi) agar sejajar dengan 'name:'
-        # yang ada di atasnya, tetapi tanpa tanda '-'.
-        run: |
-          curl -LSs "https://raw.githubusercontent.com/anko5/MemKernel/refs/heads/main/kernel/setup.sh" | bash -s Y
-          
-      - name: SUKI setup
-        run: |
-          # Download and execute the SUKI setup script.
-          # This is likely for integrating SUKI features into the kernel.
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
-
+        
       - name: Android kernel build
         # --- SARAN PERBAIKAN (BEST PRACTICE) ---
         # Mengganti '@master' dengan '@v1' agar build lebih stabil
