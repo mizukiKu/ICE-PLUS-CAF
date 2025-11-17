@@ -20,7 +20,7 @@ jobs:
         with:
           arch: arm64
           compiler: gcc/12
-          defconfig: ice-whyred-oldcam_defconfig
+          defconfig: xiaomi-stock_defconfig
           image: Image.gz-dtb
 
       - name: Upload Built Kernel
