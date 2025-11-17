@@ -1,4 +1,4 @@
-name: RezzzFy Project
+name: Kernel Build
 
 on:
   workflow_dispatch:
@@ -7,26 +7,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout kernel source
-        uses: actions/checkout@v4
-        
-      - name: Android kernel build
-        # --- SARAN PERBAIKAN (BEST PRACTICE) ---
-        # Mengganti '@master' dengan '@v1' agar build lebih stabil
-        uses: lemniskett/android-kernel-actions@master
-        id: build
-        env:
-          NAME: RezzzFy
-        with:
-          arch: arm64
-          compiler: gcc/12
-          defconfig: xiaomi-stock_defconfig
-          image: Image.gz-dtb
+    - name: Checkout kernel source
+      uses: actions/checkout@v4
 
-      - name: Upload Built Kernel
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-kernel
-          path: |
-            # Path ini sudah benar, tidak perlu diubah.
-            ${{ steps.build.outputs.outfile }}
+    - name: Set up MemKernel as a module (M-OUT) with specified name
+      run: |
+        curl -LSs "https://raw.githubusercontent.com/anko5/MemKernel/refs/heads/main/kernel/setup.sh" | bash -s M dogi
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: RezzzzFy
+      with:
+        arch: arm64
+        compiler: gcc/12
+        defconfig: xiaomi-stock_defconfig
+        image: Image.gz-dtb
+
+    - name: Upload Kernel and Module
+      uses: actions/upload-artifact@v4
+      with:
+        name: moduleandkernel
+        path: |
+          ${{ steps.build.outputs.outfile }}
+          ./out/drivers/memkernel/memkernel.ko
+          
