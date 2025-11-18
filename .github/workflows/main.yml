@@ -21,17 +21,7 @@ jobs:
           # Download and execute the SUFS setup script.
           # This is likely for integrating SUFS features into the kernel.
           curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
-  
-         cd out/arch/arm64/boot
 
-          curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch
-
-          chmod 777 patch
-
-          ./patch
-
-           mv -f oImage Image
-     
       - name: Android kernel build
         uses: lemniskett/android-kernel-actions@master
         id: build
