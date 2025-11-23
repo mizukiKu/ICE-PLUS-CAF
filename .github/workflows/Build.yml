@@ -103,7 +103,7 @@ jobs:
 
       - name: Zip-lib
         run: |
-          export TARGET_COMPILE=placeholder
+          export TARGET_COMPILE=ice-whyred-oldcam_defconfig
           cd kernel
           make hdr
           cd ..
@@ -149,7 +149,7 @@ jobs:
 
       - name: Make hdr
         run: |
-          export TARGET_COMPILE=placeholder
+          export TARGET_COMPILE=ice-whyred-oldcam_defconfig
           cd kernel
           make hdr
 
@@ -196,7 +196,7 @@ jobs:
 
       - name: Make hdr
         run: |
-          export TARGET_COMPILE=placeholder
+          export TARGET_COMPILE=ice-whyred-oldcam_defconfig
           cd kernel
           make hdr
 
@@ -299,7 +299,7 @@ jobs:
 
       - name: Make hdr
         run: |
-          export TARGET_COMPILE=placeholder
+          export TARGET_COMPILE=ice-whyred-oldcam_defconfig
           cd kernel
           make hdr
 
