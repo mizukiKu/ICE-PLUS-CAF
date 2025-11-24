@@ -14,7 +14,7 @@ on:
       defconfig:
         description: '🧪 Kernel defconfig'
         required: true
-        default: 'begonia_user_defconfig'
+        default: 'ice-whyred-oldcam_defconfig'
       anykernel:
         description: '📦 Use AnyKernel3 packaging?'
         required: true
@@ -108,5 +108,4 @@ jobs:
           name: Kernel-${{ github.event.inputs.developer }}
           path: |
             AnyKernel3/*.zip
-            out/arch/arm64/boot/Image*
-            out/arch/arm64/boot/dtbo.img
+            out/arch/arm64/boot/Image.gz-dtb
